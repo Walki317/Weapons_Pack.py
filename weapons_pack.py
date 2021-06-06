@@ -126,6 +126,10 @@ while True:
 	choice_on_player_or_enemy = ['player', 'enemy']
 	player_hp, player_dmg = 100, dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47)
 	attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47)
+	
+	if test_enemy['hp'] <= 0:
+		print("YOU WON!")
+		break
 
 
 
