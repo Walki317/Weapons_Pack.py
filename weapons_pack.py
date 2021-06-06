@@ -3,7 +3,7 @@ import random
 import time
 #For all the warnings you need the hp, dfn (defense) and dmg stats all setup.
 
-yes_or_no = input("Do you want to use the sword or a GUN: ")
+yes_or_no = input("Do you want to use the sword, PISTOL, flail, watergun, ak-47 or a paper ak-47: ")
 player = hp = 100 and dmg = yes_or_no
 test_enemy = hp = 20 and dmg = 2
 if_user_want_to_use_the_attachment = input("There's a attachment available. Would you like to use it?: ")
