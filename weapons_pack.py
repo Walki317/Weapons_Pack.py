@@ -23,6 +23,7 @@ def sword():
 		used = True
 	elif yes_or_no == 'The gun' or "the gun":
 		used = True
+		pistol()
 	elif used == True:
 		sword()
 		hp = hp - dmg
@@ -139,9 +140,9 @@ def watergun():
 	info_on_sword = input("Do you want info on the sword?")
 	info_on_gun = input("Do you want info on the GUN?")
 	info_on_flail = input("Do you want info on the flail?")
-	on_enemy_head = random.randchoice(True, False)
-	on_enemy_body = random.randchoice(True, False)
-	enemy = hp = 10 and dmg = 2
+	on_test_enemy_head = random.randchoice(True, False)
+	on_test_enemy_body = random.randchoice(True, False)
+	test_enemy = hp = 10 and dmg = 2
 	on_player_head = random.randchoice(True, False)
 	on_player_body = random.randchoice(True, False)
 	player = hp = 100 and dmg = watergun(dmg)
@@ -165,21 +166,21 @@ def watergun():
 	elif on_player_head == True:
 		time.sleep(5000)
 	elif on_player_head == False:
-		pass
+		on_player_body = True
 	elif on_player_body == True:
-		on_enemy_head == True
+		on_test_enemy_head == True
 	elif on_player_body == False:
 		pass
-	elif on_enemy_head == True:
+	elif on_test_enemy_head == True:
 		enemy = time.sleep(5000)
-	elif on_enemy_body == True:
+	elif on_test_enemy_body == True:
 		on_player_head = True
-	elif on_enemy_head == False:
-		pass
-	elif on_enemy_body == False:
+	elif on_test_enemy_head == False:
+		on_test_enemy_body = True
+	elif on_test_enemy_body == False:
 		pass
 	elif used == False:
-		pass
+		yes_or_no
 	else:
 		pass
 
