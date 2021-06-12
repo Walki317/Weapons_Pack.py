@@ -33,7 +33,7 @@ def dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47):
 		
 
 
-def attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47):
+def attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47, player):
 	if test_enemy['stunned_turns'] > 0:
 		test_enemy['hp'] -= test_enemy['stunned_dmg']
 		test_enemy['stunned turns'] -= 1
