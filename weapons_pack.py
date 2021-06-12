@@ -4,7 +4,7 @@ import time
 #For all the warnings you need the hp, dfn (defense) and dmg stats all setup.
 
 
-def dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47):
+def dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47, scar_l, ak_37, ak_sh47):
 	#a, b, c, d, e, f = sword, pistol, flail, watergun, ak47, paper_ak47
 	if yes_or_no == 'a':
 		return sword['dmg']
@@ -38,7 +38,7 @@ def dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47):
 		return ak_37['dmg_close']
 	
 
-def attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47, player):
+def attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47, player, scar_l, ak_37, ak_sh47):
 	if test_enemy['stunned_turns'] > 0:
 		test_enemy['hp'] -= test_enemy['stunned_dmg']
 		test_enemy['stunned turns'] -= 1
@@ -234,8 +234,8 @@ while True:
 	choice_head_or_body = ['head', 'body']
 	choice_on_player_or_enemy = ['player', 'enemy']
 	choice_close_or_far = ['close', 'far']
-	player_hp, player_dmg = 100, dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47)
-	attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47, player)
+	player_hp, player_dmg = 100, dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47, scar_l, ak_37, ak_sh47)
+	attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47, player, scar_l, ak_37, ak_sh47)
 
 
 
