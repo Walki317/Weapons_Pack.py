@@ -159,6 +159,9 @@ if_user_want_to_use_the_attachment = "no"
 i = 0
 #main part of the program
 while True:
+	if test_enemy['hp'] <= 0:
+		print("You WON!")
+		break
 	if minigun['usable'] == False:
 		minigun['dmg'] = 0
 	if i == 0:
