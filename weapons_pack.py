@@ -29,9 +29,14 @@ def dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47):
 	elif yes_or_no == 'k':
 		return hammer['dmg']
 	elif yes_or_no == 'l':
-		return shotgun['dmg']
-		
-
+		return shotgun['dmg_close']
+	elif yes_or_no == 'm':
+		return scar_l['dmg']
+	elif yes_or_no == 'n':
+		return ak_sh47['dmg_close']
+	elif yes_or_no == 'o':
+		return ak_37['dmg_close']
+	
 
 def attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47, player):
 	if test_enemy['stunned_turns'] > 0:
@@ -91,14 +96,32 @@ def attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_pl
 	elif player_dmg == hammer['dmg']:
 		test_enemy['stunned_turns'] = hammer['stunned_turns']
 		test_enemy['hp'] -= hammer['dmg'] * (1 - (test_enemy['dfn'] / 10))
-	elif player_dmg == shotgun['dmg']:
-		close_or_far == random.choice('dmg_close', 'dmg_far')
-		if close_or_far == 'dmg_close':
+	elif player_dmg == shotgun['dmg_close']:
+		close_or_far == random.choice(choice_close_or_far)
+		if close_or_far == 'close':
 			test_enemy['hp'] -= shotgun['dmg_close'] * (1 - (test_enemy['dfn'] / 10))
 		else:
 			test_enemy['hp'] -= shotgun['dmg_far'] * (1 - (test_enemy['dfn'] / 10))
+	elif player_dmg == scar_l['dmg']:
+		if test_enemy['dfn'] > 0:
+			test_enemy['hp'] -= scar_l['dmg'] * (1 - (test_enemy['dfn'] / 10))
+			test_enemy['dfn'] -= 1
+		else:
+			test_enemy['hp'] -= scar_l['dmg'] * (1 - (test_enemy['dfn'] / 10))
+	elif player_dmg == ak_sh47['dmg_close']:
+		close_or_far = random.choice(choice_close_or_far)
+		if close_or_far == 'close':
+			test_enemy['hp'] -= ak_sh47['dmg_close'] * (1 - (test_enemy['dfn'] / 10))
+		else:
+			tets_enemy['hp'] -= ak_sh47['dmg_far'] * (1 - (test_enemy['dfn'] / 10))
+	elif player_dmg == ak_37['dmg_close']:
+		close_or_far = random.choice(choice_close_or_far)
+		if close_or_far == 'close':
+			test_enemy['hp'] -= ak_37['dmg_close'] * (1 - (test_enemy['dfn'] / 10))
+		else:
+			test_enemy['hp'] -= ak_37['dmg_far'] * (1 - (test_enemy['dfn'] / 10))
 
-	print('Your HP: ' + str(player_hp) + '\nEnemy HP: '+ str(test_enemy['hp']) + '\nEnemy Dfn: '+ str(test_enemy['dfn']))
+	print('Your HP: ' + str(player_hp) + '\nEnemy HP: '+ str(int(test_enemy['hp'])) + '\nEnemy Dfn: '+ str(test_enemy['dfn']))
 
 #all needed variables stored in dictionaries
 test_enemy = {
@@ -159,6 +182,19 @@ shotgun = {
 player = {
 	'stunned': False,
 }
+scar_l = {
+	'dmg': 12,
+	'min_dfn': 1,
+}
+ak_sh47 = {
+	'dmg_close': 25,
+	'dmg_far': 17,
+}
+ak_37 = {
+	'dmg_close': 15,
+	'dmg_far': 13,
+}
+
 if_user_want_to_use_the_attachment = "no"
 i = 0
 #main part of the program
@@ -173,14 +209,14 @@ while True:
 		i += 1
 	
 		if info == 'yes':
-			print('SWORD\n damage: 2\nPISTOL\n damage: body = 3, head = 5, with attachment: body = 5, head = 9\nFLAIL\n damage: 9\nWATERGUN\n damage: 1 AND stuns player and enemy\nAK47\n damage: 15\nPAPER AK47\n damage: 20\nKNIFE\n damage: 1, bleeding: 1 (5 turns), stuns enemy for 5 turns\nMINIGUN\n damage: 30, breaks after 1 turn\nPORTABLE FLAMETHROWER\n damage: 10\nFLAMETHROWER\n damage: 20\nHAMMER\n damage: 15, stuns enemy for 3 turns\nSHOTGUN\n damage: close = 7, far = 2')
+			print('SWORD\n damage: 2\nPISTOL\n damage: body = 3, head = 5, with attachment: body = 5, head = 9\nFLAIL\n damage: 9\nWATERGUN\n damage: 1 AND stuns player and enemy\nAK47\n damage: 15\nPAPER AK47\n damage: 20\nKNIFE\n damage: 1, bleeding: 1 (5 turns), stuns enemy for 5 turns\nMINIGUN\n damage: 30, breaks after 1 turn\nPORTABLE FLAMETHROWER\n damage: 10\nFLAMETHROWER\n damage: 20\nHAMMER\n damage: 15, stuns enemy for 3 turns\nSHOTGUN\n damage: close = 7, far = 2\nSCAR L\n damage: 12, takes 1 point from enemy defense\nAK-SH47\n damage: close = 25, far = 17\nAK-37\n damage: close = 15, far = 13\n')
 			time.sleep(5)
 		else:
 			pass
 
 	while True:
-		yes_or_no = input("Which weapon do you want to use? (type 'a' or 'b' or 'c' or....)\na) sword\nb) pistol\nc) flail\nd) watergun\ne) ak47\nf) paper ak47\ng) knife\nh) minigun\ni) portable flamethrower\nj) flamethrower\nk) hammer\nl) shotgun\n").lower()
-		if yes_or_no == "a" or "b" or "c" or "d" or "e" or "f" or "g" or "h" or "i" or "j" or "k" or "l":
+		yes_or_no = input("Which weapon do you want to use? (type 'a' or 'b' or 'c' or....)\na) sword\nb) pistol\nc) flail\nd) watergun\ne) ak47\nf) paper ak47\ng) knife\nh) minigun\ni) portable flamethrower\nj) flamethrower\nk) hammer\nl) shotgun\nm) scar l\nn) ak-sh47\no) ak-37\n").lower()
+		if yes_or_no == "a" or "b" or "c" or "d" or "e" or "f" or "g" or "h" or "i" or "j" or "k" or "l" or "m" or "n" or "o":
 			if minigun['usable'] == False and yes_or_no == "h":
 				print("Oh no! Minigun malfunctioned!")
 				break
@@ -197,6 +233,7 @@ while True:
 				print('Invalid Input. Try Again.')
 	choice_head_or_body = ['head', 'body']
 	choice_on_player_or_enemy = ['player', 'enemy']
+	choice_close_or_far = ['close', 'far']
 	player_hp, player_dmg = 100, dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47)
 	attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47, player)
 
