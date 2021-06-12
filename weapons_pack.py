@@ -41,68 +41,69 @@ def attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_pl
 		test_enemy['stunned_dmg'] == 0
 	
 	if player_dmg == sword['dmg']:
-		test_enemy['hp'] -= sword['dmg']
+		test_enemy['hp'] -= sword['dmg'] * (1 - (test_enemy['dfn'] / 10))
 	elif player_dmg == pistol['dmg']:
 		if if_user_want_to_use_the_attachment == 'no':
 			head_or_body = random.choice(choice_head_or_body)
 			if head_or_body == 'body':
-				test_enemy['hp'] -= pistol['dmg']
+				test_enemy['hp'] -= pistol['dmg'] * (1 - (test_enemy['dfn'] / 10))
 			else:
-				test_enemy['hp'] -= pistol['dmg_head']
+				test_enemy['hp'] -= pistol['dmg_head'] * (1 - (test_enemy['dfn'] / 10))
 		else:
 			head_or_body = random.choice(choice_head_or_body)
 			if head_or_body == 'body':
-				test_enemy['hp'] -= pistol['dmg_a']
+				test_enemy['hp'] -= pistol['dmg_a'] * (1 - (test_enemy['dfn'] / 10))
 			else:
-				test_enemy['hp'] -= pistol['dmg_a_head']
+				test_enemy['hp'] -= pistol['dmg_a_head'] * (1 - (test_enemy['dfn'] / 10))
 	elif player_dmg == flail['dmg']:
 		player_or_enemy = random.choice(choice_on_player_or_enemy)
 		if player_or_enemy == 'player':
-			player_hp -= flail['dmg']
-			time.sleep(5)
+			player_hp -= flail['dmg'] * (1 - (test_enemy['dfn'] / 10))
+			player['stunned'] = True
 		else:
-			test_enemy['hp'] -= flail['dmg']
+			test_enemy['hp'] -= flail['dmg'] * (1 - (test_enemy['dfn'] / 10))
 			test_enemy['stunned'] = True
 	elif player_dmg == watergun['dmg']:
-		test_enemy['hp'] -= watergun['dmg']
+		test_enemy['hp'] -= watergun['dmg'] * (1 - (test_enemy['dfn'] / 10))
 	elif player_dmg == ak47['dmg']:
 		head_or_body = random.choice(choice_head_or_body)
 		if head_or_body == 'body':
-			test_enemy['hp'] = test_enemy['hp'] + test_enemy['enemy_body_dfn'] - ak47['dmg']
+			test_enemy['hp'] = test_enemy['hp'] + test_enemy['enemy_body_dfn'] - (ak47['dmg'] * (1 - (test_enemy['dfn'] / 10)))
 		else:
-			test_enemy['hp'] = test_enemy['hp'] + test_enemy['enemy_head_dfn'] - ak47['dmg']
+			test_enemy['hp'] = test_enemy['hp'] + test_enemy['enemy_head_dfn'] - (ak47['dmg'] * (1 - (test_enemy['dfn'] / 10)))
 	elif player_dmg == paper_ak47['dmg']:
 		head_or_body = random.choice(choice_head_or_body)
 		if head_or_body == 'body':
-			test_enemy['hp'] = test_enemy['hp'] + test_enemy['enemy_body_dfn'] - paper_ak47['dmg']
+			test_enemy['hp'] = test_enemy['hp'] + test_enemy['enemy_body_dfn'] - (paper_ak47['dmg'] * (1 - (test_enemy['dfn'] / 10)))
 		else:
-			test_enemy['hp'] = test_enemy['hp'] + test_enemy['enemy_head_dfn'] - paper_ak47['dmg']
+			test_enemy['hp'] = test_enemy['hp'] + test_enemy['enemy_head_dfn'] - (paper_ak47['dmg'] * (1 - (test_enemy['dfn'] / 10)))
 	elif player_dmg == knife['dmg']:
-		test_enemy['hp'] -= knife['dmg']
+		test_enemy['hp'] -= knife['dmg'] * (1 - (test_enemy['dfn'] / 10))
 		test_enemy['stunned_turns'] = knife['stunned_turns']
 		test_enemy['stunned_dmg'] = knife['stunned_dmg']
 	elif player_dmg == minigun['dmg']:
-		test_enemy['hp'] -= minigun['dmg']
+		test_enemy['hp'] -= minigun['dmg'] * (1 - (test_enemy['dfn'] / 10))
 		minigun['usable'] = False
 	elif player_dmg == portable_flamethrower['dmg']:
-		test_enemy['hp'] -= portable_flamethrower['dmg']
+		test_enemy['hp'] -= portable_flamethrower['dmg'] * (1 - (test_enemy['dfn'] / 10))
 	elif player_dmg == flamethrower['dmg']:
-		test_enemy['hp'] -= flamethrower['dmg']
+		test_enemy['hp'] -= flamethrower['dmg'] * (1 - (test_enemy['dfn'] / 10))
 	elif player_dmg == hammer['dmg']:
 		test_enemy['stunned_turns'] = hammer['stunned_turns']
-		test_enemy['hp'] -= hammer['dmg']
+		test_enemy['hp'] -= hammer['dmg'] * (1 - (test_enemy['dfn'] / 10))
 	elif player_dmg == shotgun['dmg']:
 		close_or_far == random.choice('dmg_close', 'dmg_far')
 		if close_or_far == 'dmg_close':
-			test_enemy['hp'] -= shotgun['dmg_close']
+			test_enemy['hp'] -= shotgun['dmg_close'] * (1 - (test_enemy['dfn'] / 10))
 		else:
-			test_enemy['hp'] -= shotgun['dmg_far']
-	
-	print('Your HP: ' + str(player_hp) + '\nEnemy HP: '+ str(test_enemy['hp']))
+			test_enemy['hp'] -= shotgun['dmg_far'] * (1 - (test_enemy['dfn'] / 10))
+
+	print('Your HP: ' + str(player_hp) + '\nEnemy HP: '+ str(test_enemy['hp']) + '\nEnemy Dfn: '+ str(test_enemy['dfn']))
 
 #all needed variables stored in dictionaries
 test_enemy = {
 	'dmg': 2,
+	'dfn': 3,
 	'hp': 20,
 	'stunned_turns': 0,
 	'stunned_dmg': 0,
@@ -155,6 +156,9 @@ shotgun = {
 	'dmg_close': 7,
 	'dmg_far': 2,
 }
+player = {
+	'stunned': False,
+}
 if_user_want_to_use_the_attachment = "no"
 i = 0
 #main part of the program
@@ -194,7 +198,7 @@ while True:
 	choice_head_or_body = ['head', 'body']
 	choice_on_player_or_enemy = ['player', 'enemy']
 	player_hp, player_dmg = 100, dmg(yes_or_no, sword, pistol, flail, watergun, ak47, paper_ak47)
-	attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47)
+	attack(if_user_want_to_use_the_attachment, choice_head_or_body, choice_on_player_or_enemy, test_enemy, player_hp, player_dmg, sword, pistol, flail, watergun, ak47, paper_ak47, player)
 
 
 
